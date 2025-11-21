@@ -7,7 +7,7 @@ function number(val) {
           if (!validate(val)) {
                     return;
           }
-          if(val !== "0" && displayValue === "0") {
+          if(val !== "0" && val !=='.' && displayValue === "0") {
                     displayValue = "";
           }
           
@@ -17,7 +17,7 @@ function number(val) {
 }
 
 function calculate(operator) {
-          if (displayValue === "") return;
+          if (displayValue === "" || display==='0') return;
           if ("+-*/.".includes(displayValue.slice(-1))) return;
           displayValue += operator;
           console.log(operator);
@@ -32,12 +32,19 @@ function clearDisplay() {
 
 
 function backspace() {
+          if (display.value=== '0') {
+                    return;
+          }
           displayValue = displayValue.slice(0, -1);
           display.value = displayValue;
+          if (displayValue === "") {
+                    displayValue = "0";
+                    display.value = displayValue;
+          }
 }
 
 function sum() {
-          if (displayValue === "") return;        
+          if (displayValue === "" || display.value === '0') return;        
           if ("+-*/.".includes(displayValue.slice(-1))) return;
           displayValue = parseFloat(eval(displayValue).toFixed(3)).toString();
           display.value = displayValue;
